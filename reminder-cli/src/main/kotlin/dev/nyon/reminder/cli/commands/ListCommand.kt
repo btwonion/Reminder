@@ -10,7 +10,7 @@ class ListCommand : CliktCommand(name = "list", help = "Lists all of your remind
     override fun run() = launchJob {
         terminal.println(cyan("Here are your reminders: "))
         remindersCollection.find().toFlow().collect {
-            terminal.println("${gray(" - ")}${blue(it.name)}  ${white(it.description)}")
+            terminal.println("${gray(" - ")}${blue(it.name)}${green("  ${it.description}")}")
         }
     }
 }
