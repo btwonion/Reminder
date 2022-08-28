@@ -29,7 +29,7 @@ val db = mongoClient.getDatabase(System.getenv("MONGO_DATABASE"))
 lateinit var remindersCollection: CoroutineCollection<ReminderEntry>
 
 suspend fun initMongoDbs() {
-    remindersCollection = db.getAndCreateCollection("challengeConfigurations")
+    remindersCollection = db.getAndCreateCollection("reminders")
 }
 
 //Extensions
