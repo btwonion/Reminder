@@ -11,19 +11,19 @@ import dev.nyon.reminder.cli.commands.RemoveCommand
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlin.system.exitProcess
 
 lateinit var mainScope: CoroutineScope
 val terminal = Terminal(theme = Theme.PlainAscii)
-suspend fun main(args: Array<String>) = coroutineScope {
-    mainScope = this
+suspend fun main(args: Array<String>) {
+
     try {
         app()
-        Reminder().subcommands(ListCommand(), AddCommand(), RemoveCommand()).main(args)
+        coroutineScope {
+            mainScope = this
+            Reminder().subcommands(ListCommand(), AddCommand(), RemoveCommand()).main(args)
+        }
     } catch (exc: Exception) {
         exc.printStackTrace()
-    } finally {
-        exitProcess(0)
     }
 }
 
